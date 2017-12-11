@@ -1,0 +1,30 @@
+<form class="search">
+  <label>
+    <input
+      #searchQuery
+      (input)="queryChange.emit(searchQuery.value)"
+      type="text"
+      placeholder="Bücher suchen...">
+  </label>
+</form>
+
+<div [hidden]="searchViewIsDisabled" class="search-results">
+  <div class="container">
+    <button class="btn btn-default"
+           (click)="searchViewIsDisabled = true">
+      Schließen
+    </button>
+    <tr-book-grid
+      *ngIf="books$ | async as books; else loadingSpinner"
+      [books]="books">
+    </tr-book-grid>
+    <ng-template #loadingSpinner>
+      <div class="spinner"></div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- .search-results>.container>tr-book-grid -->
+
+<!-- form.search>label>input[placeholder=Bücher_suchen...] -->
+

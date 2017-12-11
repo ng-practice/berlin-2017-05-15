@@ -1,0 +1,77 @@
+<form #addForm="ngForm">
+  <section class="form-block">
+    <div class="form-group">
+      <label for="book-add-isbn">ISBN</label>
+      <label
+        i18n="@@BookAddForm:isbn:label"
+        for="book-add-isbn"
+        class="tooltip tooltip-validation tooltip-top-left tooltip-md">
+        <input
+          [(ngModel)]="book.isbn"
+          #isbn="ngModel"
+          name="isbn"
+          required
+          id="book-add-isbn"
+          type="text"
+          class="form-control">
+          <span class="tooltip-content" i18n="@@BookAddForm:isbn:validation">
+            Bitte geben Sie eine ISBN-Nummer an.
+          </span>
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="book-add-title">Titel</label>
+      <label
+        [class.invalid]="title.invalid && (title.dirty || title.touched)"
+        for="book-add-title"
+        class="tooltip tooltip-validation tooltip-top-left tooltip-md">
+        <input
+          [(ngModel)]="book.title"
+          #title="ngModel"
+          required
+          id="book-add-title"
+          name="title"
+          type="text"
+          class="form-control">
+          <span class="tooltip-content">
+            Bitte geben Sie einen Titel ein
+          </span>
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="book-add-authors">Autoren</label>
+      <label
+        [class.invalid]="authors.invalid && (authors.dirty || authors.touched)"
+        for="book-add-authors"
+        class="tooltip tooltip-validation tooltip-top-left tooltip-md">
+        <input
+          [ngModel]="book.authors"
+          (ngModelChange)="updateAuthors(authors)"
+          #authors="ngModel"
+          required
+          id="book-add-authors"
+          name="authors"
+          type="text"
+          class="form-control">
+          <span class="tooltip-content">
+            Bitte geben Sie die Autoren des Buchs an.
+          </span>
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="book-add-price">Preis</label>
+      <input #price id="book-add-price" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="book-add-description">Beschreiben</label>
+      <textarea #description id="book-add-description" class="form-control"></textarea>
+    </div>
+    <button
+      type="button"
+      [disabled]="addForm.invalid"
+      (click)="addBook()"
+      class="btn btn-primary">
+      Neues Buch anlegen
+    </button>
+  </section>
+</form>
